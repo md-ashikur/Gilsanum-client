@@ -25,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-auto bg-white">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} />
 
@@ -35,7 +35,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Navbar onMenuClick={handleMenuClick} user={userData} />
 
         {/* Page Content */}
-        {children}
+        <div className="flex-1 overflow-auto">
+          {children}
+        </div>
       </div>
 
       {/* Mobile Overlay */}

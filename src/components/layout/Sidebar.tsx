@@ -10,7 +10,7 @@ import help from "../../../public/images/help.png"
 import setting from "../../../public/images/setting.png"
 import logout from "../../../public/images/logout.png"
 import message from "../../../public/images/message.png"
-
+import diamond from "../../../public/images/Upgrade Icon Container.png"
 
 interface SidebarProps {
   isOpen: boolean;
@@ -182,39 +182,65 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     <div
       className={` ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
-      } fixed inset-y-0 left-0 z-50 w-64 bg-white-100 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
+      } fixed inset-y-0 left-0 z-50 w-[260px] bg-white-100 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col`}
     >
-      {/* Logo and Close Button */}
-      <div className="flex items-center justify-between m-[24px]">
-        <NavLink to="/" className="">
-          <img src={logo} alt="" className='w-[76px] h-[30px]' />
-        </NavLink>
-        <button
-          onClick={onClose}
-          className="lg:hidden text-secondary-200 "
-        >
-          ✕
-        </button>
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto">
+        {/* Logo and Close Button */}
+        <div className="flex items-center justify-between m-[24px]">
+          <NavLink to="/" className="">
+            <img src={logo} alt="" className='w-[76px] h-[30px]' />
+          </NavLink>
+          <button
+            onClick={onClose}
+            className="lg:hidden text-secondary-200 "
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Navigation */}
+        <nav className="mt-6 px-4">
+          {/* General Menu */}
+          <div className="mb-8">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              GENERAL MENU
+            </p>
+            <ul className="space-y-1">{menuItems.map(renderMenuItem)}</ul>
+          </div>
+
+          {/* Account Menu */}
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              ACCOUNT
+            </p>
+            <ul className="space-y-1">{accountItems.map(renderMenuItem)}</ul>
+          </div>
+        </nav>
       </div>
 
-      {/* Navigation */}
-      <nav className="mt-6 px-4">
-        {/* General Menu */}
-        <div className="mb-8">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-            GENERAL MENU
-          </p>
-          <ul className="space-y-1">{menuItems.map(renderMenuItem)}</ul>
+      {/* Promotional Card - Fixed at bottom */}
+      <div className="p-4 mt-auto text-secondary-200">
+        <div className="bg-white border border-white-100 rounded-lg p-3 relative overflow-hidden">
+         
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <div className="flex items-center mb-3">
+              <div className="rounded-lg flex items-center justify-center mr-3">
+               <img src={diamond} alt="" className='w-[28px] h-[28px]'/>
+              </div>
+              <div>
+                <h3 className="font-semibold text-sm">Activate Super</h3>
+                <p className="text-[11px]">Unlock All features on Gilsanum</p>
+              </div>
+            </div>
+            <button className="w-full bg-primary-500 border border-primary-600 text-white font-medium py-2 px-4 rounded-lg text-sm">
+              Upgrade
+            </button>
+          </div>
         </div>
-
-        {/* Account Menu */}
-        <div>
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-            ACCOUNT
-          </p>
-          <ul className="space-y-1">{accountItems.map(renderMenuItem)}</ul>
-        </div>
-      </nav>
+      </div>
     </div>
   );
 };

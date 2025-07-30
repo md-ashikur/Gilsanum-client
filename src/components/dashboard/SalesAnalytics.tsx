@@ -1,27 +1,33 @@
 import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 import type { ChartDataType } from '../../types';
-
+import sales from "../../../public/images/Dual-Sim-Signal-4--Streamline-Ultimate.svg";
 interface SalesAnalyticsProps {
   data: ChartDataType[];
 }
 
 const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ data }) => {
-  const maxValue = Math.max(...data.map(item => item.value));
+  // Find the highlighted item for tooltip
+  const highlightedItem = data.find(item => item.isHighlighted);
 
   return (
-    <div className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div className="lg:col-span-2 bg-white w-[617px] h-[364px] rounded-[8px] p-6 border border-white-200">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">📊 Sale Analytics</h3>
+        <div className='flex items-center space-x-2'>
+          <img src={sales} alt="" />
+        <h3 className="opacity-80 text-secondary-200"> Sale Analytics</h3>
+        </div>
+
         <div className="flex items-center space-x-4 text-sm">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-            <span className="text-gray-600">Refund</span>
+          <div className="flex items-center space-x-1">
+            <div className="w-[14px] h-[14px] bg-primary-100 rounded-[2px]"></div>
+            <span className="text-secondary-200 opacity-80">Refund</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-            <span className="text-gray-600">Checkout</span>
+          <div className="flex items-center space-x-1">
+            <div className="w-[14px] h-[14px] bg-primary-500 rounded-[2px]"></div>
+            <span className="text-secondary-200 opacity-80">Checkout</span>
           </div>
-          <select className="border border-gray-300 rounded px-2 py-1 text-sm">
+          <select className="border border-white-200 rounded-[8px] px-3 py-2  text-secondary-200 opacity-80 bg-white outline-none">
             <option>This Month</option>
             <option>Last Month</option>
             <option>This Year</option>
@@ -30,35 +36,46 @@ const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ data }) => {
       </div>
 
       {/* Chart */}
-      <div className="h-64 flex items-end justify-center space-x-8">
-        {data.map((item, index) => {
-          const height = (item.value / maxValue) * 192; // 192px = h-48
-          const isHighlighted = item.isHighlighted;
-          
-          return (
-            <div key={item.month} className="text-center">
-              <div
-                className={`w-12 rounded-t mb-2 relative ${
-                  isHighlighted 
-                    ? 'bg-blue-500' 
-                    : index % 2 === 0 
-                      ? 'bg-blue-100' 
-                      : 'bg-purple-200'
-                }`}
-                style={{ height: `${height}px` }}
-              >
-                {isHighlighted && (
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs px-2 py-1 rounded">
-                    ${item.value.toLocaleString()}
-                  </div>
-                )}
-              </div>
-              <span className={`text-xs ${isHighlighted ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
-                {item.month}
-              </span>
-            </div>
-          );
-        })}
+      <div className="h-64 relative ">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} margin={{ top: 50, right: 30, left: 20, bottom: 5 }}>
+            <XAxis
+              dataKey="month"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 12, fill: '#6B7280' }}
+            />
+            <YAxis hide />
+            <Bar 
+              dataKey="value" 
+              radius={[50, 50, 50, 50]}
+              maxBarSize={37}
+            >
+              {data.map((entry, index) => (
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={entry.isHighlighted ? '#4169E1' : '#A8C5FF'} 
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+        
+        {/* Custom tooltip for highlighted item */}
+        {highlightedItem && (
+          <div 
+            className="absolute bg-white border border-white-200 text-xs px-2 py-1 rounded shadow-sm text-center pointer-events-none"
+            style={{
+              top: '20px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 10
+            }}
+          >
+            <div className="text-[10px] text-gray-500">Income:</div>
+            <div className="font-medium text-secondary-200">${highlightedItem.value.toLocaleString()}</div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,15 +1,18 @@
 import React from 'react';
 import type { ProductItemType } from '../../types';
-
+import product from '../../../public/images/Startup-Product-Rocket-Box--Streamline-Ultimate.svg';
 interface ProductMonitoringProps {
   products: ProductItemType[];
 }
 
 const ProductMonitoring: React.FC<ProductMonitoringProps> = ({ products }) => {
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white w-[468px] h-[364px] rounded-xl p-6 text-secondary-200 border border-gray-100">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">👀 Product Monitoring</h3>
+       <div className='flex items-center space-x-2'>
+         <img src={product} alt="" />
+        <h3 >Product Monitoring</h3>
+       </div>
         <select className="border border-gray-300 rounded px-2 py-1 text-sm">
           <option>Popular Product</option>
           <option>New Products</option>

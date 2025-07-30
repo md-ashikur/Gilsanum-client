@@ -1,5 +1,21 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Inter Tight Font Face Declarations */
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
 @theme {
   --color-primary-500: #414FF4; /* custom */
@@ -7,15 +23,16 @@
   --color-secondary-200: #2B3674;
 
   --color-white-100: #EFEFEF;
+  --color-white-200: #DFDFDF;
   --color-white: #FFFFFF;
  
 
-  --font-family-sans: 'Inter Tight', sans-serif;
+  --font-family-sans: 'Inter Tight';
 }
 
 /* Apply Inter Tight font globally */
 * {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter Tight';
 }
 
 /* Custom scrollbar */

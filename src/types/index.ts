@@ -16,8 +16,10 @@ export interface StatsCardType {
   value: string;
   change: string;
   isPositive: boolean;
-  description: string;
+  pre_description: string;
+  post_description: string;
   highlightValue?: string;
+  icon?: string; 
 }
 
 export interface ProductItemType {

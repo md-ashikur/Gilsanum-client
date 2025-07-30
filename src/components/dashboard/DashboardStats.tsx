@@ -1,63 +1,159 @@
 import React, { useState, useRef, useEffect } from 'react';
 import StatsCard from './StatsCard';
 import type { StatsCardType } from '../../types';
+// Replace the path below with the actual path to your icon file
+import customerWidgetIcon from '/images/Remote-Access--Streamline-Ultimate.svg';
+// Replace the path below with the actual path to your download icon file
+import downloadIcon from '/images/Download-Bottom--Streamline-Ultimate.svg';
+// Replace the path below with the actual path to your calendar icon file
+import calendar from '/images/Calendar-Edit-1--Streamline-Ultimate.svg';
+import monthlyIcon from '/images/Money-Bag-Dollar--Streamline-Ultimate.svg';
+import orderIcon from '/images/Shipment-Star--Streamline-Ultimate.svg';
+import salesIcon from '/images/Shopping-Basket-Star--Streamline-Ultimate.svg';
+import newCustomerIcon from '/images/Multiple-Users-1--Streamline-Ultimate.svg';
 
 const statsData: StatsCardType[] = [
   {
     id: 'monthly-earnings',
     title: 'Monthly Earnings',
+    icon: monthlyIcon,
     value: '$108,906',
     change: '5.2%',
-    isPositive: true,
-    description: 'You can earn',
-    highlightValue: '$5,098 this month',
+    isPositive: false,
+    pre_description: 'You can earn',
+    highlightValue: '$5,098',
+    post_description: 'this month',
   },
   {
     id: 'total-orders',
     title: 'Total Orders',
+    icon: orderIcon,
     value: '+2,345',
     change: '6.2%',
     isPositive: true,
-    description: 'You received',
-    highlightValue: '190 more orders this month',
+    pre_description: 'You received',
+    highlightValue: '190',
+    post_description: 'more orders this month',
   },
   {
     id: 'total-sales',
     title: 'Total Sales',
+    icon: salesIcon,
     value: '$256,740',
     change: '3.1%',
     isPositive: false,
-    description: 'Sales revenue fell by',
-    highlightValue: '$10,200 this month',
+    pre_description: 'Sales revenue fell by',
+    highlightValue: '$10,200',
+    post_description: 'this month',
   },
   {
     id: 'new-customers',
     title: 'New Customers',
+    icon: newCustomerIcon,
     value: '+1,230',
     change: '5.7%',
     isPositive: true,
-    description: 'Gained',
-    highlightValue: '65 new customers this month',
+    pre_description: 'Gained',
+    highlightValue: '65',
+    post_description: 'new customers this month',
   },
 ];
 
 const DashboardStats: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('Month');
-  const [startDate, setStartDate] = useState('2024-03-01');
-  const [endDate, setEndDate] = useState('2024-03-30');
+  
+  // Set default dates to current month (first day to last day)
+  const getCurrentMonthDates = () => {
+    const now = new Date();
+    const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    
+    return {
+      start: firstDay.toISOString().split('T')[0],
+      end: lastDay.toISOString().split('T')[0]
+    };
+  };
+  
+  const { start: defaultStart, end: defaultEnd } = getCurrentMonthDates();
+  const [startDate, setStartDate] = useState(defaultStart);
+  const [endDate, setEndDate] = useState(defaultEnd);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const datePickerRef = useRef<HTMLDivElement>(null);
 
   const formatDisplayDate = (dateString: string) => {
+    if (!dateString) return '';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      day: '2-digit', 
-      month: 'long' 
-    });
+    const day = date.getDate();
+    const month = date.toLocaleDateString('en-US', { month: 'long' });
+    
+    return `${day} ${month}`;
   };
 
   const handlePeriodClick = () => {
     setShowDatePicker(!showDatePicker);
+  };
+
+  // Function to set date ranges based on period selection
+  const setPeriodDates = (period: string) => {
+    const now = new Date();
+    let start: Date, end: Date;
+
+    switch (period) {
+      case 'Day': {
+        // Current day
+        start = new Date(now);
+        end = new Date(now);
+        break;
+      }
+
+      case 'Week': {
+        // Current week (Sunday to Saturday)
+        const dayOfWeek = now.getDay();
+        start = new Date(now);
+        start.setDate(now.getDate() - dayOfWeek);
+        end = new Date(now);
+        end.setDate(now.getDate() + (6 - dayOfWeek));
+        break;
+      }
+      
+      case 'Month': {
+        // Current month
+        start = new Date(now.getFullYear(), now.getMonth(), 1);
+        end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        break;
+      }
+      
+      case 'Year': {
+        // Current year
+        start = new Date(now.getFullYear(), 0, 1);
+        end = new Date(now.getFullYear(), 11, 31);
+        break;
+      }
+      
+      default:
+        return;
+    }
+
+    setStartDate(start.toISOString().split('T')[0]);
+    setEndDate(end.toISOString().split('T')[0]);
+  };
+
+  // Handle start date change with validation
+  const handleStartDateChange = (newStartDate: string) => {
+    if (newStartDate && endDate && new Date(newStartDate) > new Date(endDate)) {
+      // If start date is after end date, adjust end date
+      setEndDate(newStartDate);
+    }
+    setStartDate(newStartDate);
+  };
+
+  // Handle end date change with validation
+  const handleEndDateChange = (newEndDate: string) => {
+    if (newEndDate && startDate && new Date(newEndDate) < new Date(startDate)) {
+      // If end date is before start date, adjust start date
+      setStartDate(newEndDate);
+    }
+    setEndDate(newEndDate);
   };
 
   // Close date picker when clicking outside
@@ -75,19 +171,17 @@ const DashboardStats: React.FC = () => {
   }, []);
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 text-secondary-200">
       {/* Header with date filter and download button */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-4">
-          <div className="relative flex items-center space-x-2" ref={datePickerRef}>
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+          <div className="border border-white-200 px-4 py-3 rounded-[8px] relative flex items-center space-x-2" ref={datePickerRef}>
+            <img src={calendar} alt="" />
             <button
               onClick={handlePeriodClick}
-              className="text-sm font-medium text-gray-700 bg-transparent border-none outline-none cursor-pointer hover:text-gray-900 flex items-center space-x-1"
+              className=" outline-none cursor-pointer hover:text-gray-900 flex items-center space-x-1"
             >
-              <span>{selectedPeriod}</span>
+              <span className='text-secondary-200 opacity-80 '>{selectedPeriod}</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
@@ -100,7 +194,18 @@ const DashboardStats: React.FC = () => {
                   <h3 className="text-sm font-medium text-gray-700 mb-2">Select Period</h3>
                   <button
                     onClick={() => {
+                      setSelectedPeriod('Day');
+                      setPeriodDates('Day');
+                      setShowDatePicker(false);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                  >
+                    Day
+                  </button>
+                  <button
+                    onClick={() => {
                       setSelectedPeriod('Week');
+                      setPeriodDates('Week');
                       setShowDatePicker(false);
                     }}
                     className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 rounded"
@@ -110,6 +215,7 @@ const DashboardStats: React.FC = () => {
                   <button
                     onClick={() => {
                       setSelectedPeriod('Month');
+                      setPeriodDates('Month');
                       setShowDatePicker(false);
                     }}
                     className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 rounded"
@@ -119,6 +225,7 @@ const DashboardStats: React.FC = () => {
                   <button
                     onClick={() => {
                       setSelectedPeriod('Year');
+                      setPeriodDates('Year');
                       setShowDatePicker(false);
                     }}
                     className="block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 rounded"
@@ -134,7 +241,8 @@ const DashboardStats: React.FC = () => {
                       <input
                         type="date"
                         value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
+                        max={endDate} // Prevent start date from being after end date
+                        onChange={(e) => handleStartDateChange(e.target.value)}
                         className="w-full text-sm border border-gray-200 rounded px-3 py-2 outline-none focus:border-blue-500"
                       />
                     </div>
@@ -143,8 +251,9 @@ const DashboardStats: React.FC = () => {
                       <input
                         type="date"
                         value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                        className="w-full text-sm border border-gray-200 rounded px-3 py-2 outline-none focus:border-blue-500"
+                        min={startDate} // Prevent end date from being before start date
+                        onChange={(e) => handleEndDateChange(e.target.value)}
+                        className="w-full text-sm border border-white-200 rounded px-3 py-2 outline-none focus:border-white-200"
                       />
                     </div>
                   </div>
@@ -154,21 +263,17 @@ const DashboardStats: React.FC = () => {
           </div>
           
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-600">{formatDisplayDate(startDate)}</span>
-            <span className="text-sm text-gray-400">to</span>
-            <span className="text-sm text-gray-600">{formatDisplayDate(endDate)}</span>
+            <span className="border border-white-200 px-4 py-3 rounded-[8px]">{formatDisplayDate(startDate)}</span>
+            <span>to</span>
+            <span className="border border-white-200 px-4 py-3 rounded-[8px]">{formatDisplayDate(endDate)}</span>
           </div>
         </div>
         
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-2.239" />
-              </svg>
-            </div>
-            <span className="text-sm text-gray-600">Customer Widget</span>
-          </div>
+        <div className="flex items-center space-x-2">
+          <button className="flex items-center border border-white-200 rounded-[8px] px-4 py-3 space-x-2">
+            <img src={customerWidgetIcon} alt="" />
+            <span className=" text-secondary-200 opacity-80 text-sm">Customer Widget</span>
+          </button>
           
           <button 
             onClick={() => {
@@ -185,18 +290,16 @@ const DashboardStats: React.FC = () => {
               link.click();
               document.body.removeChild(link);
             }}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 transition-colors"
+            className="bg-primary-500 hover:bg-primary-600 text-white px-4 py-3 rounded-[8px] flex items-center space-x-2 text-sm transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
+             <img src={downloadIcon} alt="" />
             <span>Download</span>
           </button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {statsData.map((stats) => (
           <StatsCard key={stats.id} stats={stats} />
         ))}

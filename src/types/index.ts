@@ -33,6 +33,7 @@ export interface ProductItemType {
 export interface ChartDataType {
   month: string;
   value: number;
+  refund: number;
   isHighlighted?: boolean;
 }
 

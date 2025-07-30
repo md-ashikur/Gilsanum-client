@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import StatsCard from './StatsCard';
 import type { StatsCardType } from '../../types';
-// Replace the path below with the actual path to your icon file
 import customerWidgetIcon from '/images/Remote-Access--Streamline-Ultimate.svg';
-// Replace the path below with the actual path to your download icon file
 import downloadIcon from '/images/Download-Bottom--Streamline-Ultimate.svg';
-// Replace the path below with the actual path to your calendar icon file
+
 import calendar from '/images/Calendar-Edit-1--Streamline-Ultimate.svg';
 import monthlyIcon from '/images/Money-Bag-Dollar--Streamline-Ultimate.svg';
 import orderIcon from '/images/Shipment-Star--Streamline-Ultimate.svg';

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import type { MenuItemType } from '../../types';
-import logo from "../../../public/images/Logo.png"
-import overview from "../../../public/images/overview.png"
-import product from "../../../public/images/product.png"
-import profile from "../../../public/images/profile.png"
-import customer from "../../../public/images/customer.png"
-import help from "../../../public/images/help.png"
-import setting from "../../../public/images/setting.png"
-import logout from "../../../public/images/logout.png"
-import message from "../../../public/images/message.png"
-import diamond from "../../../public/images/Upgrade Icon Container.png"
+import logo from "/images/Logo.png"
+import overview from "/images/overview.png"
+import product from "/images/product.png"
+import profile from "/images/profile.png"
+import customer from "/images/customer.png"
+import help from "/images/help.png"
+import setting from "/images/setting.png"
+import logout from "/images/logout.png"
+import message from "/images/message.png"
+import diamond from "/images/Upgrade Icon Container.png"
 
 interface SidebarProps {
   isOpen: boolean;

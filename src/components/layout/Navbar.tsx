@@ -1,9 +1,9 @@
 import React from "react";
 import type { UserProfileType } from "../../types";
-import userPic from "../../../public/images/Profile Image.png";
-import searchIcon from "../../../public/images/MagnifyingGlass.svg";
-import notificationIcon from "../../../public/images/Alert-Bell-Notification-2--Streamline-Ultimate.svg";
-import menuIcon from "../../../public/images/Filter-Sort-Lines-Descending--Streamline-Ultimate.svg";
+import userPic from "/images/Profile Image.png";
+import searchIcon from "/images/MagnifyingGlass.svg";
+import notificationIcon from "/images/Alert-Bell-Notification-2--Streamline-Ultimate.svg";
+import menuIcon from "/images/Filter-Sort-Lines-Descending--Streamline-Ultimate.svg";
 interface NavbarProps {
   onMenuClick: () => void;
   user: UserProfileType;

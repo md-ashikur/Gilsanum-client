@@ -101,8 +101,8 @@ const ProductMonitoring: React.FC = () => {
   }
 
   return (
-    <div className="bg-white w-[468px] h-[364px] rounded-xl p-4 text-secondary-200 border border-white-200">
-      <div className="flex  items-center justify-between mb-2">
+    <div className="bg-white rounded-xl p-4 text-secondary-200 border border-white-200">
+      <div className="flex  items-center justify-between">
         <div className='flex flex-col space-x-1'>
           <div className='flex items-center space-x-1'>
           <img src={product} alt="" className="w-6 h-6" />

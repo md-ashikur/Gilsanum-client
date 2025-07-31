@@ -11,6 +11,7 @@ import setting from "/images/setting.png"
 import logout from "/images/logout.png"
 import message from "/images/message.png"
 import diamond from "/images/Upgrade Icon Container.png"
+import sun from "/images/Sun.svg"
 
 interface SidebarProps {
   isOpen: boolean;
@@ -82,6 +83,7 @@ const accountItems: MenuItemType[] = [
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState<string[]>(['product']);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const toggleExpanded = (itemId: string) => {
     setExpandedItems(prev => 
@@ -89,6 +91,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         ? prev.filter(id => id !== itemId)
         : [...prev, itemId]
     );
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode(prev => !prev);
+    // You can add theme switching logic here
+    console.log('Theme toggled:', !isDarkMode ? 'dark' : 'light');
   };
 
   const isActive = (href: string) => {
@@ -191,12 +199,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <NavLink to="/" className="">
             <img src={logo} alt="" className='w-[76px] h-[30px]' />
           </NavLink>
-          <button
-            onClick={onClose}
-            className="lg:hidden text-secondary-200 "
-          >
-            ✕
-          </button>
+          <div className="flex items-center space-x-2">
+            {/* Sun/Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="w-8 h-8 bg-white border border-white-200 rounded-[8px] flex items-center justify-center hover:bg-gray-50 transition-colors"
+              aria-label="Toggle theme"
+            >
+              <img src={sun} alt="Theme" className="w-4 h-4" />
+            </button>
+            <button
+              onClick={onClose}
+              className="lg:hidden text-secondary-200 "
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         {/* Navigation */}

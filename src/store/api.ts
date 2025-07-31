@@ -18,11 +18,6 @@ interface ApiResponse<T> {
   message?: string;
 }
 
-interface ApiError {
-  success: false;
-  error: string;
-  message: string;
-}
 
 // Create the API slice
 export const api = createApi({

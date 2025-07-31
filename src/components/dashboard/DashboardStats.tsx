@@ -169,9 +169,9 @@ const DashboardStats: React.FC = () => {
   }, []);
 
   return (
-    <div className="mb-8 text-secondary-200">
+    <div className=" text-secondary-200">
       {/* Header with date filter and download button */}
-      <div className="flex lg:flex-row flex-col items-center lg:justify-between lg:space-y-0 space-y-3 mb-6">
+      <div className="flex lg:flex-row flex-col items-center lg:justify-between lg:space-y-0 space-y-3">
         <div className="flex lg:flex-row flex-col items-center lg:space-y-0 space-y-3 space-x-4">
           <div className="border border-white-200 px-4 py-3 rounded-[8px] relative flex items-center space-x-2" ref={datePickerRef}>
             <img src={calendar} alt="" />

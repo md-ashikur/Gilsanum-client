@@ -207,7 +207,7 @@ const SalesAnalytics: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="lg:col-span-2 bg-white lg:w-[617px] w-full lg:h-[364px] rounded-[8px] p-4 border border-white-200 overflow-hidden flex items-center justify-center">
+      <div className=" bg-white rounded-[8px] p-4 border border-white-200 overflow-hidden flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
           <p className="text-sm text-gray-500">Loading chart data...</p>

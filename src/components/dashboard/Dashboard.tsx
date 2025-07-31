@@ -11,11 +11,11 @@ const Dashboard: React.FC = () => {
       <DashboardStats />
 
       {/* Charts and Product Monitoring */}
-      <div className="grid lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3">
+      <div className="grid lg:grid-cols-5 grid-cols-1 gap-6">
+        <div className="lg:col-span-3 col-span-1">
           <SalesAnalytics />
         </div>
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 col-span-1">
           <ProductMonitoring />
         </div>
       </div>

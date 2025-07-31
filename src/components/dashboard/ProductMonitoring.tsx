@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useGetPopularProductsQuery } from '../../store/api';
 import { useUIStore } from '../../store/uiStore';
 import product from '/images/Startup-Product-Rocket-Box--Streamline-Ultimate.svg';
+import { Link } from 'react-router-dom';
 
 const ProductMonitoring: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
@@ -100,7 +101,7 @@ const ProductMonitoring: React.FC = () => {
   }
 
   return (
-    <div className="bg-white w-[468px] h-[364px] rounded-xl p-4 text-secondary-200 border border-gray-100">
+    <div className="bg-white w-[468px] h-[364px] rounded-xl p-4 text-secondary-200 border border-white-200">
       <div className="flex  items-center justify-between mb-2">
         <div className='flex flex-col space-x-1'>
           <div className='flex items-center space-x-1'>
@@ -121,7 +122,7 @@ const ProductMonitoring: React.FC = () => {
             onChange={handleSortChange}
           >
             <option value="orders">Orders</option>
-            <option value="popular">Popular Product</option>
+            <option value="popular">Popular</option>
             <option value="new">New Products</option>
             <option value="top_selling">Top Selling</option>
           </select>
@@ -133,7 +134,7 @@ const ProductMonitoring: React.FC = () => {
       
       
 
-      <div className="space-y-3">
+      <div>
         {sortedProducts.map((product, index) => {
           const isSelected = selectedProductId === product.id;
           const displayRank = index + 1;
@@ -142,25 +143,30 @@ const ProductMonitoring: React.FC = () => {
             <div
               key={product.id}
               onClick={() => handleProductClick(product.id)}
-              className={`flex items-center justify-between py-3 px-4 rounded-xl cursor-pointer transition-all duration-200 hover:bg-gray-50 ${
-                isSelected ? 'bg-blue-50/30 border-l-4 border-l-blue-500' : 'hover:border-l-4 hover:border-l-gray-300'
+              className={`relative flex items-center justify-between py-[10px] px-4 rounded-[8px] cursor-pointer transition-all duration-200 hover:bg-gray-50 outline-none ${
+                isSelected ? 'bg-[#206BF60D]/60 ' : 'hover:border-l-4 hover:border-l-gray-300 border-b-1 border-b-white-200 rounded-none'
               }`}
             >
-              <div className="flex items-center space-x-4">
-                <span className={`text-xl font-bold w-6 transition-colors duration-200 ${
-                  isSelected ? 'text-blue-500' : 'text-gray-400'
+              {isSelected && (
+                <div className="absolute left-0 w-[4px] h-[28px] bg-primary-500 rounded-tr-[4px] rounded-br-[4px]" />
+              )}
+              <div className="flex items-center space-x-3">
+                <span className={`font-medium w-6 transition-colors duration-200 ${
+                  isSelected ? 'text-secondary-200' : 'text-secondary-200 opacity-70'
                 }`}>
                   {displayRank.toString().padStart(2, '0')}
                 </span>
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-12 h-12 rounded-xl object-cover"
+                  className="w-10 h-10 rounded-[6px] object-cover"
                 />
-                <span className="font-medium text-secondary-200 text-base">{product.name}</span>
+                <span className={`font-medium text-secondary-200 text-sm ${
+                  isSelected ? 'text-secondary-200' : 'text-secondary-200 opacity-70'
+                }`}>{product.name}</span>
               </div>
-              <span className={`text-sm font-semibold transition-colors duration-200 ${
-                isSelected ? 'text-blue-500' : 'text-gray-500'
+              <span className={`text-xs font-semibold transition-colors duration-200 ${
+                isSelected ? 'text-primary-500' : 'text-secondary-200 opacity-70'
               }`}>
                 {product.orders.toLocaleString()} Orders
               </span>
@@ -169,9 +175,11 @@ const ProductMonitoring: React.FC = () => {
         })}
       </div>
 
-      <button className="w-full mt-6 text-gray-400 text-sm font-medium hover:text-gray-600 transition-colors underline">
+      <Link to='/shop'>
+      <button className="w-full mt-6 text-secondary opacity-40 text-sm font-medium hover:text-gray-600 transition-colors underline hover:text-primary-500 hover:opacity-100">
         view all details
       </button>
+      </Link>
     </div>
   );
 };

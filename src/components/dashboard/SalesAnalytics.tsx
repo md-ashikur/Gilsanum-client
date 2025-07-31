@@ -188,11 +188,72 @@ const SalesAnalytics: React.FC = () => {
       }
     },
     responsive: [{
+      breakpoint: 1024,
+      options: {
+        plotOptions: {
+          bar: {
+            columnWidth: '45px'
+          }
+        },
+        xaxis: {
+          labels: {
+            style: {
+              fontSize: '11px'
+            }
+          }
+        }
+      }
+    }, {
       breakpoint: 768,
       options: {
         plotOptions: {
           bar: {
-            columnWidth: '80%'
+            columnWidth: '50px'
+          }
+        },
+        xaxis: {
+          labels: {
+            style: {
+              fontSize: '10px'
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            style: {
+              fontSize: '10px'
+            }
+          }
+        }
+      }
+    }, {
+      breakpoint: 640,
+      options: {
+        plotOptions: {
+          bar: {
+            columnWidth: '60px'
+          }
+        },
+        xaxis: {
+          labels: {
+            style: {
+              fontSize: '9px'
+            },
+            maxHeight: 40,
+            offsetY: 5
+          }
+        },
+        yaxis: {
+          labels: {
+            style: {
+              fontSize: '9px'
+            }
+          }
+        },
+        grid: {
+          padding: {
+            left: 5,
+            right: 5
           }
         }
       }
@@ -241,25 +302,30 @@ const SalesAnalytics: React.FC = () => {
     );
   }
   return (
-    <div className="lg:col-span-2 bg-white w-[617px] h-[364px] rounded-[8px] p-4 border border-white-200 overflow-hidden">
-      <div className="flex items-center justify-between mb-6">
+    <div className="lg:col-span-2 bg-white rounded-[8px] p-3 sm:p-4 border border-white-200 overflow-hidden">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
         <div className="flex items-center space-x-2">
-          <img src={sales} alt="" />
-          <h3 className="opacity-80 text-secondary-200"> Sale Analytics</h3>
+          <img src={sales} alt="" className="w-5 h-5 sm:w-6 sm:h-6" />
+          <h3 className="opacity-80 text-secondary-200 text-sm sm:text-base">Sale Analytics</h3>
         </div>
 
-        <div className="flex items-center space-x-4 text-sm">
-          <div className="flex items-center space-x-1">
-            <div className="w-[14px] h-[14px] bg-[#B9CFF9] rounded-[2px]"></div>
-            <span className="text-secondary-200 opacity-80">Refund</span>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm w-full sm:w-auto">
+          {/* Legend */}
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 sm:w-[14px] sm:h-[14px] bg-[#B9CFF9] rounded-[2px]"></div>
+              <span className="text-secondary-200 opacity-80">Refund</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 sm:w-[14px] sm:h-[14px] bg-[#414FF4] rounded-[2px]"></div>
+              <span className="text-secondary-200 opacity-80">Checkout</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-1">
-            <div className="w-[14px] h-[14px] bg-[#414FF4] rounded-[2px]"></div>
-            <span className="text-secondary-200 opacity-80">Checkout</span>
-          </div>
-          <div className="relative ml-10">
+          
+          {/* Dropdown */}
+          <div className="relative w-full sm:w-auto sm:ml-4 lg:ml-10">
             <select
-              className="appearance-none bg-white border border-white-200 rounded-[8px] px-[10px] py-2 text-sm text-secondary-200 pr-6 focus:outline-none cursor-pointer"
+              className="appearance-none bg-white border border-white-200 rounded-[8px] px-2 sm:px-[10px] py-2 text-xs sm:text-sm text-secondary-200 pr-6 sm:pr-6 focus:outline-none cursor-pointer w-full sm:w-auto"
               value={timePeriod}
               onChange={handleTimePeriodChange}
             >
@@ -267,7 +333,7 @@ const SalesAnalytics: React.FC = () => {
               <option value="year">Last 7 Days</option>
             </select>
             <svg
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-secondary-200 pointer-events-none"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 text-secondary-200 pointer-events-none"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -284,9 +350,15 @@ const SalesAnalytics: React.FC = () => {
       </div>
 
       {/* Chart */}
-      <div className="h-64 relative">
+      <div className="h-48 sm:h-56 lg:h-64 relative overflow-hidden">
         <Chart
-          options={chartOptions}
+          options={{
+            ...chartOptions,
+            chart: {
+              ...chartOptions.chart,
+              height: '100%'
+            }
+          }}
           series={chartData.series}
           type="bar"
           height="100%"

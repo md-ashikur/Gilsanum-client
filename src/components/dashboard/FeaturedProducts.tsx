@@ -328,34 +328,41 @@ const FeaturedProducts: React.FC = () => {
 
           {/* Filter Dropdown */}
           {showFilterModal && (
-            <div className="absolute top-full right-0 mt-1 w-96 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-6 max-h-[80vh] overflow-y-auto">
+            <div className="absolute top-full right-0 mt-1 w-80 sm:w-96 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 sm:p-6 max-h-[80vh] overflow-y-auto">
               {/* Header */}
-              <div className="flex items-center justify-between ">
-                <h3 className="text-sm  text-[#555E67] mb-3">Filter by:</h3>
-               
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <h3 className="text-sm text-[#555E67]">Filter by:</h3>
+                <button
+                  onClick={() => setShowFilterModal(false)}
+                  className="text-gray-400 hover:text-gray-600 sm:hidden"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
 
               {/* Date Range Section */}
-              <div className="mb-6">
+              <div className="mb-4 sm:mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className=" text-secondary-200 font-semibold">Date Range</h4>
+                  <h4 className="text-secondary-200 font-semibold text-sm">Date Range</h4>
                   <button
                     onClick={resetDateRange}
-                    className="text-secondary-200 font-semibold hover:text-blue-700"
+                    className="text-secondary-200 font-semibold hover:text-blue-700 text-xs sm:text-sm"
                   >
                     Reset
                   </button>
                 </div>
                 
                 <div className="space-y-3">
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs text-gray-500 mb-1">From</label>
                       <input
                         type="date"
                         value={dateRange.from.split('-').reverse().join('-')}
                         onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value.split('-').reverse().join('-') }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        className="w-full px-2 sm:px-3 py-2 border border-gray-300 rounded-md text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -364,15 +371,15 @@ const FeaturedProducts: React.FC = () => {
                         type="date"
                         value={dateRange.to.split('-').reverse().join('-')}
                         onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value.split('-').reverse().join('-') }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        className="w-full px-2 sm:px-3 py-2 border border-gray-300 rounded-md text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2">
                     <button
                       onClick={() => setDatePresetValue("today")}
-                      className={`px-4 py-4 text-xs rounded-md border ${
+                      className={`px-2 sm:px-3 py-2 text-xs rounded-md border ${
                         datePreset === "today" 
                           ? "bg-blue-50 border-blue-200 text-blue-700" 
                           : "border-gray-300 text-gray-600 hover:bg-gray-50"
@@ -382,7 +389,7 @@ const FeaturedProducts: React.FC = () => {
                     </button>
                     <button
                       onClick={() => setDatePresetValue("week")}
-                      className={`px-3 py-2 text-xs rounded-md border ${
+                      className={`px-2 sm:px-3 py-2 text-xs rounded-md border ${
                         datePreset === "week" 
                           ? "bg-blue-50 border-blue-200 text-blue-700" 
                           : "border-gray-300 text-gray-600 hover:bg-gray-50"
@@ -392,7 +399,7 @@ const FeaturedProducts: React.FC = () => {
                     </button>
                     <button
                       onClick={() => setDatePresetValue("month")}
-                      className={`px-3 py-2 text-xs rounded-md border ${
+                      className={`px-2 sm:px-3 py-2 text-xs rounded-md border ${
                         datePreset === "month" 
                           ? "bg-blue-50 border-blue-200 text-blue-700" 
                           : "border-gray-300 text-gray-600 hover:bg-gray-50"
@@ -405,12 +412,12 @@ const FeaturedProducts: React.FC = () => {
               </div>
 
               {/* Amount Section */}
-              <div className="mb-6">
+              <div className="mb-4 sm:mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-secondary-200 font-semibold">Amount</h4>
+                  <h4 className="text-secondary-200 font-semibold text-sm">Amount</h4>
                   <button
                     onClick={resetAmount}
-                    className="text-secondary-200 font-semibold"
+                    className="text-secondary-200 font-semibold text-xs sm:text-sm"
                   >
                     Reset
                   </button>
@@ -419,7 +426,7 @@ const FeaturedProducts: React.FC = () => {
                 <select
                   value={amountFilter}
                   onChange={(e) => setAmountFilter(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full px-2 sm:px-3 py-2 border border-gray-300 rounded-md text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
                 >
                   <option value="low_to_high">Low to High (Lowest First)</option>
                   <option value="high_to_low">High to Low (Highest First)</option>
@@ -430,18 +437,18 @@ const FeaturedProducts: React.FC = () => {
               </div>
 
               {/* Price Range Section */}
-              <div className="mb-2">
+              <div className="mb-4 sm:mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-secondary-200 font-semibold">Price Range</h4>
+                  <h4 className="text-secondary-200 font-semibold text-sm">Price Range</h4>
                   <button
                     onClick={resetPriceRange}
-                    className="text-secondary-200 font-semibold"
+                    className="text-secondary-200 font-semibold text-xs sm:text-sm"
                   >
                     Reset
                   </button>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <div className="relative h-6">
                     {/* Track */}
                     <div className="absolute top-1/2 transform -translate-y-1/2 w-full h-2 bg-gray-200 rounded-full"></div>
@@ -467,7 +474,7 @@ const FeaturedProducts: React.FC = () => {
                           setPriceRange([value, priceRange[1]]);
                         }
                       }}
-                      className="absolute top-1/2 transform -translate-y-1/2 w-full h-6 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-secondary-200 [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:cursor-pointer"
+                      className="absolute top-1/2 transform -translate-y-1/2 w-full h-6 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 sm:[&::-webkit-slider-thumb]:w-6 sm:[&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-secondary-200 [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:cursor-pointer"
                     />
                     
                     {/* Upper handle */}
@@ -482,11 +489,11 @@ const FeaturedProducts: React.FC = () => {
                           setPriceRange([priceRange[0], value]);
                         }
                       }}
-                      className="absolute top-1/2 transform -translate-y-1/2 w-full h-6 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-secondary-200 [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:cursor-pointer"
+                      className="absolute top-1/2 transform -translate-y-1/2 w-full h-6 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 sm:[&::-webkit-slider-thumb]:w-6 sm:[&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-secondary-200 [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:cursor-pointer"
                     />
                   </div>
                   
-                  <div className="flex justify-between text-sm text-gray-600">
+                  <div className="flex justify-between text-xs sm:text-sm text-gray-600">
                     <span>${priceRange[0]}</span>
                     <span>${priceRange[1]}</span>
                   </div>
@@ -494,16 +501,16 @@ const FeaturedProducts: React.FC = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex space-x-3">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                 <button
                   onClick={resetAllFilters}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-primary-500 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-3 sm:px-4 py-2 border border-gray-300 text-primary-500 rounded-lg hover:bg-gray-50 transition-colors text-sm"
                 >
                   Reset All
                 </button>
                 <button
                   onClick={applyFilters}
-                  className="flex-1 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                  className="flex-1 px-3 sm:px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors text-sm"
                 >
                   Apply Filter({getActiveFilterCount()})
                 </button>

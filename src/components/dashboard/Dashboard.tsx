@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
       <DashboardStats />
 
       {/* Charts and Product Monitoring */}
-      <div className="grid lg:grid-cols-5 grid-cols-1 gap-6">
+      <div className="grid lg:grid-cols-5 grid-cols-1 gap-4">
         <div className="lg:col-span-3 col-span-1">
           <SalesAnalytics />
         </div>

@@ -49,7 +49,7 @@ export const api = createApi({
     
     getProduct: builder.query<ApiResponse<ProductItemType>, string>({
       query: (id) => `/products/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Product', id }],
+      providesTags: (_result, _error, id) => [{ type: 'Product', id }],
     }),
     
     createProduct: builder.mutation<ApiResponse<ProductItemType>, Partial<ProductItemType>>({
@@ -67,7 +67,7 @@ export const api = createApi({
         method: 'PUT',
         body: product,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Product', id }],
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Product', id }],
     }),
     
     deleteProduct: builder.mutation<ApiResponse<ProductItemType>, string>({
@@ -93,7 +93,7 @@ export const api = createApi({
     
     getCustomer: builder.query<ApiResponse<CustomerType>, string>({
       query: (id) => `/customers/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Customer', id }],
+      providesTags: (_result, _error, id) => [{ type: 'Customer', id }],
     }),
     
     createCustomer: builder.mutation<ApiResponse<CustomerType>, Partial<CustomerType>>({
@@ -111,7 +111,7 @@ export const api = createApi({
         method: 'PUT',
         body: customer,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Customer', id }],
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Customer', id }],
     }),
     
     deleteCustomer: builder.mutation<ApiResponse<CustomerType>, string>({
@@ -139,7 +139,7 @@ export const api = createApi({
     
     getOrder: builder.query<ApiResponse<OrderType>, string>({
       query: (id) => `/orders/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Order', id }],
+      providesTags: (_result, _error, id) => [{ type: 'Order', id }],
     }),
     
     createOrder: builder.mutation<ApiResponse<OrderType>, Partial<OrderType>>({
@@ -157,7 +157,7 @@ export const api = createApi({
         method: 'PUT',
         body: order,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: 'Order', id }, 'Dashboard'],
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Order', id }, 'Dashboard'],
     }),
     
     deleteOrder: builder.mutation<ApiResponse<OrderType>, string>({

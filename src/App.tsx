@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components';
 import { Dashboard } from './components';
+import Shop from './components/shop/Shop';
 import {
   Profile,
   ProductOverview,
@@ -24,6 +25,9 @@ function App() {
           
           {/* Dashboard route */}
           <Route path="/dashboard" element={<Dashboard />} />
+          
+          {/* Shop route */}
+          <Route path="/shop" element={<Shop />} />
           
           {/* General menu routes */}
           <Route path="/settings" element={<Settings />} />

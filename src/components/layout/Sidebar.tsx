@@ -25,6 +25,12 @@ const menuItems: MenuItemType[] = [
     href: '/dashboard',
   },
   {
+    id: 'shop',
+    label: 'Shop',
+    icon: product, // Using product icon for now, can be replaced with shop icon
+    href: '/shop',
+  },
+  {
     id: 'profile',
     label: 'Profile',
     icon: profile,

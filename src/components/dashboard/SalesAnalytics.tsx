@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
-import Chart from 'react-apexcharts';
-import type { ApexOptions } from 'apexcharts';
+import Chart from "react-apexcharts";
+import type { ApexOptions } from "apexcharts";
 import { useGetChartDataQuery } from "../../store/api";
 import { useUIStore } from "../../store/uiStore";
 import sales from "/images/Dual-Sim-Signal-4--Streamline-Ultimate.svg";
@@ -46,114 +46,114 @@ const SalesAnalytics: React.FC = () => {
     }
 
     return {
-      categories: rawData.map(item => item.month),
+      categories: rawData.map((item) => item.month),
       series: [
         {
-          name: 'Checkout',
-          data: rawData.map(item => item.value)
+          name: "Checkout",
+          data: rawData.map((item) => item.value),
         },
         {
-          name: 'Refund',
-          data: rawData.map(item => item.refund)
-        }
-      ]
+          name: "Refund",
+          data: rawData.map((item) => item.refund),
+        },
+      ],
     };
   }, [response?.data, timePeriod]);
 
   // ApexCharts options
   const chartOptions: ApexOptions = {
     chart: {
-      type: 'bar',
+      type: "bar",
       height: 280,
       toolbar: {
-        show: false
+        show: false,
       },
       animations: {
         enabled: true,
-        speed: 800
-      }
+        speed: 800,
+      },
     },
     plotOptions: {
       bar: {
-        columnWidth: '37px',
+        columnWidth: "37px",
         borderRadius: 18,
-        borderRadiusApplication: 'around',
+        borderRadiusApplication: "around",
         dataLabels: {
-          position: 'top'
-        }
-      }
+          position: "top",
+        },
+      },
     },
-    colors: ['#B9CFF9', '#E5E7EB'],
+    colors: ["#B9CFF9", "#E5E7EB"],
     fill: {
-      colors: ['#414FF4', '#E5E7EB'],
-      type: 'solid'
+      colors: ["#414FF4", "#E5E7EB"],
+      type: "solid",
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     stroke: {
-      show: false
+      show: false,
     },
     xaxis: {
       categories: chartData.categories,
       axisBorder: {
         show: true,
-        color: '#E5E7EB'
+        color: "#E5E7EB",
       },
       axisTicks: {
         show: true,
-        color: '#E5E7EB',
-        height: 6
+        color: "#E5E7EB",
+        height: 6,
       },
       labels: {
         style: {
-          colors: '#A3A3A3',
-          fontSize: '12px'
-        }
-      }
+          colors: "#A3A3A3",
+          fontSize: "12px",
+        },
+      },
     },
     yaxis: {
       axisBorder: {
-        show: false
+        show: false,
       },
       axisTicks: {
-        show: false
+        show: false,
       },
       labels: {
         style: {
-          colors: '#A3A3A3',
-          fontSize: '12px'
+          colors: "#A3A3A3",
+          fontSize: "12px",
         },
         formatter: (value: number) => {
           if (value >= 1000) {
             return `${value / 1000}k`;
           }
           return value.toString();
-        }
-      }
+        },
+      },
     },
     grid: {
       show: true,
-      borderColor: '#E5E7EB',
+      borderColor: "#E5E7EB",
       strokeDashArray: 4,
       xaxis: {
         lines: {
-          show: false
-        }
+          show: false,
+        },
       },
       yaxis: {
         lines: {
-          show: true
-        }
-      }
+          show: true,
+        },
+      },
     },
     legend: {
-      show: false
+      show: false,
     },
     tooltip: {
       shared: false,
       intersect: true,
-      custom: function({ series, seriesIndex, dataPointIndex }) {
+      custom: function ({ series, seriesIndex, dataPointIndex }) {
         // Tooltip content
         if (seriesIndex === 0) {
           // Checkout column hovered (left side) - show income
@@ -162,7 +162,9 @@ const SalesAnalytics: React.FC = () => {
             <div class=" bg-white text-secondary-200 text-xs px-3 py-2 border border-white-100 rounded shadow-lg">
               <div class="flex flex-col items-center">
                 <span class="text-[12px] opacity-70 mr-2">Income:</span>
-                <span class="font-semibold text-[14px]">$${checkoutValue?.toLocaleString() || 0}</span>
+                <span class="font-semibold text-[14px]">$${
+                  checkoutValue?.toLocaleString() || 0
+                }</span>
               </div>
 
               
@@ -176,7 +178,9 @@ const SalesAnalytics: React.FC = () => {
             <div class="bg-white text-gray-800 text-xs px-3 py-2 border border-gray-200 rounded shadow-lg">
               <div class="flex items-center">
                 <span class="text-[10px] opacity-70 mr-2">Refund:</span>
-                <span class="font-semibold text-[12px]">$${refundValue?.toLocaleString() || 0}</span>
+                <span class="font-semibold text-[12px]">$${
+                  refundValue?.toLocaleString() || 0
+                }</span>
               </div>
             </div>
           `;
@@ -184,80 +188,90 @@ const SalesAnalytics: React.FC = () => {
       },
       marker: {
         show: true,
-        fillColors: ['#414FF4', '#E5E7EB']
-      }
+        fillColors: ["#414FF4", "#E5E7EB"],
+      },
     },
-    responsive: [{
-      breakpoint: 1024,
-      options: {
-        plotOptions: {
-          bar: {
-            columnWidth: '45px'
-          }
-        },
-        xaxis: {
-          labels: {
-            style: {
-              fontSize: '11px'
-            }
-          }
-        }
-      }
-    }, {
-      breakpoint: 768,
-      options: {
-        plotOptions: {
-          bar: {
-            columnWidth: '50px'
-          }
-        },
-        xaxis: {
-          labels: {
-            style: {
-              fontSize: '10px'
-            }
-          }
-        },
-        yaxis: {
-          labels: {
-            style: {
-              fontSize: '10px'
-            }
-          }
-        }
-      }
-    }, {
-      breakpoint: 640,
-      options: {
-        plotOptions: {
-          bar: {
-            columnWidth: '60px'
-          }
-        },
-        xaxis: {
-          labels: {
-            style: {
-              fontSize: '9px'
+    responsive: [
+      {
+        breakpoint: 1024,
+        options: {
+          plotOptions: {
+            bar: {
+              columnWidth: "37px",
+              borderRadius: 18,
+              borderRadiusApplication: "around",
             },
-            maxHeight: 40,
-            offsetY: 5
-          }
+          },
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: "11px",
+              },
+            },
+          },
         },
-        yaxis: {
-          labels: {
-            style: {
-              fontSize: '9px'
-            }
-          }
+      },
+      {
+        breakpoint: 768,
+        options: {
+          plotOptions: {
+            bar: {
+              columnWidth: "37px",
+              borderRadius: 18,
+              borderRadiusApplication: "around",
+            },
+          },
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: "10px",
+              },
+            },
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: "10px",
+              },
+            },
+          },
         },
-        grid: {
-          padding: {
-            left: 5,
-            right: 5
-          }
-        }
-      }
-    }]
+      },
+      {
+        breakpoint: 390,
+        options: {
+          plotOptions: {
+            bar: {
+              columnWidth: "37px",
+              borderRadius: 18,
+              borderRadiusApplication: "around",
+            },
+          },
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: "9px",
+              },
+              maxHeight: 40,
+              offsetY: 5,
+            },
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: "9px",
+              },
+            },
+          },
+          grid: {
+            padding: {
+              left: 5,
+              right: 5,
+            },
+          },
+        },
+      },
+    ],
   };
 
   const handleTimePeriodChange = (
@@ -306,7 +320,9 @@ const SalesAnalytics: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:mb-6 space-y-3 sm:space-y-0">
         <div className="flex items-center space-x-2">
           <img src={sales} alt="" className="w-5 h-5 sm:w-6 sm:h-6" />
-          <h3 className="opacity-80 text-secondary-200 text-sm sm:text-base">Sale Analytics</h3>
+          <h3 className="opacity-80 text-secondary-200 text-sm sm:text-base">
+            Sale Analytics
+          </h3>
         </div>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm w-full sm:w-auto">
@@ -321,7 +337,7 @@ const SalesAnalytics: React.FC = () => {
               <span className="text-secondary-200 opacity-80">Checkout</span>
             </div>
           </div>
-          
+
           {/* Dropdown */}
           <div className="relative w-full sm:w-auto sm:ml-4 lg:ml-10">
             <select
@@ -356,8 +372,8 @@ const SalesAnalytics: React.FC = () => {
             ...chartOptions,
             chart: {
               ...chartOptions.chart,
-              height: '100%'
-            }
+              height: "100%",
+            },
           }}
           series={chartData.series}
           type="bar"

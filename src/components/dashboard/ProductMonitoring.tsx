@@ -134,7 +134,7 @@ const ProductMonitoring: React.FC = () => {
       
       
 
-      <div>
+      <div className='my-4'>
         {sortedProducts.map((product, index) => {
           const isSelected = selectedProductId === product.id;
           const displayRank = index + 1;
@@ -144,7 +144,7 @@ const ProductMonitoring: React.FC = () => {
               key={product.id}
               onClick={() => handleProductClick(product.id)}
               className={`relative flex items-center justify-between py-[10px] px-4 rounded-[8px] cursor-pointer transition-all duration-200 hover:bg-gray-50 outline-none ${
-                isSelected ? 'bg-[#206BF60D]/60 ' : 'hover:border-l-4 hover:border-l-gray-300 border-b-1 border-b-white-200 rounded-none'
+                isSelected ? 'bg-[#206BF60D]/60 border-b-1 border-b-transparent' : 'border-b-1 border-b-white-200 rounded-none'
               }`}
             >
               {isSelected && (
@@ -176,7 +176,7 @@ const ProductMonitoring: React.FC = () => {
       </div>
 
       <Link to='/shop'>
-      <button className="w-full mt-6 text-secondary opacity-40 text-sm font-medium hover:text-gray-600 transition-colors underline hover:text-primary-500 hover:opacity-100">
+      <button className="w-full text-secondary opacity-40 text-sm font-medium hover:text-gray-600 transition-colors underline hover:text-primary-500 hover:opacity-100">
         view all details
       </button>
       </Link>

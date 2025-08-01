@@ -119,7 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     return (
       <li key={item.id}>
         {hasChildren ? (
-          <>
+          <div className='max-w-[260px] overflow-hidden'>
             <button
               onClick={() => toggleExpanded(item.id)}
               className={`w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-[10px] outline-none transition-colors ${
@@ -131,11 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               <div className="flex items-center">
                 {item.icon && <img src={item.icon} alt={item.label} className="w-5 h-5 mr-3" />}
                 {item.label}
-                {item.badge && (
-                  <span className="ml-auto mr-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">
-                    {item.badge}
-                  </span>
-                )}
+               
               </div>
               
             </button>
@@ -160,7 +156,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 ))}
               </ul>
             )}
-          </>
+          </div>
         ) : (
           <NavLink
             to={item.href}
@@ -176,7 +172,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             {item.icon && <img src={item.icon} alt={item.label} className="w-5 h-5 mr-3" />}
             {item.label}
             {item.badge && (
-              <span className="ml-auto px-2 py-0.5">
+              <span className="ml-auto px-2 opacity-50 py-0.5">
                 {item.badge}
               </span>
             )}
@@ -195,11 +191,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto">
         {/* Logo and Close Button */}
-        <div className="flex items-center justify-between m-[24px]">
+        <div className="flex items-center justify-between m-4">
           <NavLink to="/" className="">
             <img src={logo} alt="" className='w-[76px] h-[30px]' />
           </NavLink>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
             {/* Sun/Theme Toggle Button */}
             <button
               onClick={toggleTheme}

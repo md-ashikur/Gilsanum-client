@@ -573,7 +573,7 @@ const FeaturedProducts: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-5 grid-cols-1 gap-2">
+      <div className="grid lg:grid-cols-5 grid-cols-1 gap-4">
         {/* Product Map */}
         <div className="lg:col-span-2 col-span-1">
           <ProductMap 
@@ -587,7 +587,7 @@ const FeaturedProducts: React.FC = () => {
           {filteredProducts
             .slice(0, 4)
             .map((product: Product, index: number) => (
-              <div key={product.id} className="relative group cursor-pointer">
+              <div key={product.id} className="relative group cursor-pointer ">
                 <div className="aspect-square bg-gray-100 rounded-[12px] overflow-hidden relative">
                   <img
                     src={product.image}

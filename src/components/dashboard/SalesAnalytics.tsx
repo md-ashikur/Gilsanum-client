@@ -159,10 +159,10 @@ const SalesAnalytics: React.FC = () => {
           // Checkout column hovered (left side) - show income
           const checkoutValue = series[0][dataPointIndex];
           return `
-            <div class=" bg-white text-gray-800 text-xs px-3 py-2 border border-gray-200 rounded shadow-lg">
+            <div class=" bg-white text-secondary-200 text-xs px-3 py-2 border border-white-100 rounded shadow-lg">
               <div class="flex flex-col items-center">
-                <span class="text-[12px] text-secondary-200 opacity-70 mr-2">Income:</span>
-                <span class="font-semibold text-[14px] text-secondary-200">$${checkoutValue?.toLocaleString() || 0}</span>
+                <span class="text-[12px] opacity-70 mr-2">Income:</span>
+                <span class="font-semibold text-[14px]">$${checkoutValue?.toLocaleString() || 0}</span>
               </div>
 
               
@@ -302,8 +302,8 @@ const SalesAnalytics: React.FC = () => {
     );
   }
   return (
-    <div className="lg:col-span-2 bg-white rounded-[8px] p-3 sm:p-4 border border-white-200 overflow-hidden">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
+    <div className="lg:col-span-2 bg-white rounded-[8px] p-3 sm:p-4 border border-white-200 h-full overflow-hidden">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:mb-6 space-y-3 sm:space-y-0">
         <div className="flex items-center space-x-2">
           <img src={sales} alt="" className="w-5 h-5 sm:w-6 sm:h-6" />
           <h3 className="opacity-80 text-secondary-200 text-sm sm:text-base">Sale Analytics</h3>

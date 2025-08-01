@@ -6,7 +6,7 @@ import FeaturedProducts from "./FeaturedProducts";
 
 const Dashboard: React.FC = () => {
   return (
-    <main className="flex-1 overflow-y-auto p-5 lg:p-10 ">
+    <main className="flex-1 overflow-y-auto p-5 lg:px-10 ">
       {/* Stats Cards */}
       <DashboardStats />
 

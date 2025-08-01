@@ -1,11 +1,99 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Gilsanum Platform
 
-Currently, two official plugins are available:
+This project is a full-stack web application with a React + TypeScript + Vite frontend and a Node.js/Express backend (see `Gilsanum-server`).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## Prerequisites
+
+- Node.js (v18 or later recommended)
+- npm (v9 or later recommended)
+- [Mapbox](https://account.mapbox.com/) access token (for map features)
+
+---
+
+## Project Structure
+
+- `gilsanum-client/` — Frontend (React, Vite, TypeScript)
+- `Gilsanum-server/` — Backend (Node.js, Express)
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```
+git clone https://github.com/md-ashikur/Gilsanum-server.git
+cd Gilsanum-server
+```
+
+---
+
+### 2. Backend Setup (`Gilsanum-server`)
+
+```
+cd Gilsanum-server
+npm install
+
+# Create a .env file and set environment variables (see .env.example if available)
+# Example:
+# MONGODB_URI=your_mongodb_connection_string
+# PORT=5000
+
+npm run dev   # or: npm start
+```
+
+The backend will start on the port specified in your `.env` (default: 5000).
+
+---
+
+### 3. Frontend Setup (`gilsanum-client`)
+
+```
+cd gilsanum-client
+npm install
+
+# Create a .env file and set your Mapbox token:
+# VITE_MAPBOX_TOKEN=your_mapbox_access_token
+
+npm run dev
+```
+
+The frontend will start on [http://localhost:5173](http://localhost:5173) by default.
+
+---
+
+## Environment Variables
+
+### Backend (`Gilsanum-server/.env`)
+- `MONGODB_URI` — MongoDB connection string
+- `PORT` — Port for backend server
+
+### Frontend (`gilsanum-client/.env`)
+- `VITE_MAPBOX_TOKEN` — Mapbox access token
+
+---
+
+## Useful Scripts
+
+### Frontend
+- `npm run dev` — Start Vite dev server
+- `npm run build` — Build for production
+- `npm run preview` — Preview production build
+
+### Backend
+- `npm run dev` — Start backend in development mode (with nodemon)
+- `npm start` — Start backend in production mode
+
+---
+
+## Linting & Formatting
+
+See below for ESLint configuration and recommendations for both frontend and backend.
+
+---
 
 ## Expanding the ESLint configuration
 

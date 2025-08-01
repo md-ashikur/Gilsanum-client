@@ -8,7 +8,7 @@ import type {
 } from '../types';
 
 // Define the base URL for the API
-const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 // Define API response types
 interface ApiResponse<T> {

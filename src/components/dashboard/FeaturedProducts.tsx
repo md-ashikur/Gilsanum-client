@@ -4,12 +4,21 @@ import filter from "/images/filter-horizontal.svg";
 import location from "/images/location-04.svg";
 import ProductMap from "./ProductMap";
 
+
 interface Product {
   id: string;
   name: string;
   price: number;
   image: string;
   description?: string;
+  shop?: {
+    name: string;
+    location: {
+      lat: number;
+      lng: number;
+      address: string;
+    };
+  };
 }
 
 const FeaturedProducts: React.FC = () => {
@@ -565,9 +574,12 @@ const FeaturedProducts: React.FC = () => {
       </div>
 
       <div className="grid lg:grid-cols-5 grid-cols-1 gap-2">
-        {/* Map placeholder */}
+        {/* Product Map */}
         <div className="lg:col-span-2 col-span-1">
-            <ProductMap />
+          <ProductMap 
+            searchTerm={searchTerm}
+            filteredProducts={filteredProducts}
+          />
         </div>
 
         {/* Product Grid */}

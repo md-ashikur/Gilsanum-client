@@ -583,7 +583,7 @@ const FeaturedProducts: React.FC = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="lg:col-span-3 col-span-1 grid grid-cols-2 gap-4">
+        <div className="lg:col-span-3 col-span-1 grid lg:grid-cols-2 gap-4">
           {filteredProducts
             .slice(0, 4)
             .map((product: Product, index: number) => (
